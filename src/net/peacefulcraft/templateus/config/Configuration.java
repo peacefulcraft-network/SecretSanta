@@ -6,7 +6,7 @@ import java.net.URL;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import net.peacefulcraft.templateus.Templateus;
+import net.peacefulcraft.templateus.SecretSanta;
 
 public class Configuration {
   private FileConfiguration c;
@@ -36,5 +36,5 @@ public class Configuration {
     }
     public boolean isDebugEnabled() { return debugEnabled; }
 
-  public void saveConfiguration() { Templateus._this().saveConfig(); }
+  public void saveConfiguration() { SecretSanta._this().saveConfig(); }
 }

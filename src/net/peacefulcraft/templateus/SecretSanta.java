@@ -7,13 +7,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.templateus.commands.ExampleCommand;
 import net.peacefulcraft.templateus.config.Configuration;
-import net.peacefulcraft.templateus.listeners.PlayerJoinListener;
-public class Templateus extends JavaPlugin {
+public class SecretSanta extends JavaPlugin {
   
   public static final String messagingPrefix = ChatColor.GREEN + "[" + ChatColor.BLUE + "PCN" + ChatColor.GREEN + "]" + ChatColor.RESET;
 
-  private static Templateus _this;
-    public static Templateus _this() { return _this; }
+  private static SecretSanta _this;
+    public static SecretSanta _this() { return _this; }
 
   private static Configuration configuration;
     public static Configuration getConfiguration() { return configuration; }
@@ -59,6 +58,6 @@ public class Templateus extends JavaPlugin {
     }
 
     private void setupEventListeners() {
-      this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+      //this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
     }
 }
