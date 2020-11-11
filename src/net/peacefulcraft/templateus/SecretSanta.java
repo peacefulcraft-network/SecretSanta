@@ -59,5 +59,6 @@ public class SecretSanta extends JavaPlugin {
 
     private void setupEventListeners() {
       //this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+      // Test comment for discord
     }
 }
