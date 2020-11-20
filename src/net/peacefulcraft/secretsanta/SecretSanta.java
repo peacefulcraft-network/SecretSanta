@@ -1,12 +1,12 @@
-package net.peacefulcraft.templateus;
+package net.peacefulcraft.secretsanta;
 
 import java.util.logging.Level;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.md_5.bungee.api.ChatColor;
-import net.peacefulcraft.templateus.commands.ExampleCommand;
-import net.peacefulcraft.templateus.config.Configuration;
+import net.peacefulcraft.secretsanta.commands.ExampleCommand;
+import net.peacefulcraft.secretsanta.config.Configuration;
 public class SecretSanta extends JavaPlugin {
   
   public static final String messagingPrefix = ChatColor.GREEN + "[" + ChatColor.BLUE + "PCN" + ChatColor.GREEN + "]" + ChatColor.RESET;

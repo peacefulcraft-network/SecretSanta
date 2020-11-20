@@ -1,4 +1,4 @@
-package net.peacefulcraft.templateus.config;
+package net.peacefulcraft.secretsanta.config;
 
 import java.io.File;
 import java.net.URL;
@@ -6,7 +6,7 @@ import java.net.URL;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import net.peacefulcraft.templateus.SecretSanta;
+import net.peacefulcraft.secretsanta.SecretSanta;
 
 public class Configuration {
   private FileConfiguration c;

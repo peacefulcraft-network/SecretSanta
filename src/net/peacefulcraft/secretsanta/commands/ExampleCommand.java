@@ -1,10 +1,10 @@
-package net.peacefulcraft.templateus.commands;
+package net.peacefulcraft.secretsanta.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import net.peacefulcraft.templateus.SecretSanta;
+import net.peacefulcraft.secretsanta.SecretSanta;
 
 public class ExampleCommand implements CommandExecutor {
 
