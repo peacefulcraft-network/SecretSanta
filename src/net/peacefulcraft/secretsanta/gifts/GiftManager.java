@@ -215,7 +215,7 @@ public class GiftManager {
     /**
      * Fetches gift box of santa for player
      * @param id ID of receiver
-     * @return ShulkerBox with contents, null if it doesn't exist
+     * @return ShulkerBox with contents, null if it doesn't exist or was gifted already
      */
     public ItemStack getGift(UUID id) {
         for(UUID i : pairedPlayers.keySet()) {

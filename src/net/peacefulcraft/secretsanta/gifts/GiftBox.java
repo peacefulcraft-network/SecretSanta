@@ -85,9 +85,11 @@ public class GiftBox {
 
     /**
      * Gets shulker box containing gifts
-     * @return Loaded shulkerbox
+     * @return Loaded shulkerbox, null if gifted already
      */
     public ItemStack getGiftBox() {
+        if(this.isGifted) { return null; }
+
         ItemStack box = new ItemStack(Material.GREEN_SHULKER_BOX, 1);
         if(box.getItemMeta() instanceof BlockStateMeta) {
             BlockStateMeta bm = (BlockStateMeta)box.getItemMeta();
@@ -102,6 +104,7 @@ public class GiftBox {
             }
         }
 
+        this.isGifted = true;
         return box;
     }
 

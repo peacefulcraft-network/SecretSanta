@@ -90,6 +90,8 @@ public class Gift {
                 }
             }
         }
+
+        //TODO: Possibly add loading/saving for metadata tags on items.
     }
 
     /**
@@ -158,7 +160,8 @@ public class Gift {
         }
 
         if(!this.enchantments.isEmpty()) {
-            item.addEnchantments(this.enchantments);
+            // Possibly redudant.
+            item.addUnsafeEnchantments(this.enchantments);
         }
 
         return item;
