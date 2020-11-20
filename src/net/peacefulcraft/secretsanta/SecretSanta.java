@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.secretsanta.commands.ExampleCommand;
 import net.peacefulcraft.secretsanta.config.Configuration;
+import net.peacefulcraft.secretsanta.gifts.GiftManager;
 public class SecretSanta extends JavaPlugin {
   
   public static final String messagingPrefix = ChatColor.GREEN + "[" + ChatColor.BLUE + "PCN" + ChatColor.GREEN + "]" + ChatColor.RESET;
@@ -16,6 +17,9 @@ public class SecretSanta extends JavaPlugin {
 
   private static Configuration configuration;
     public static Configuration getConfiguration() { return configuration; }
+
+  private static GiftManager giftManager;
+    public static GiftManager getGiftManager() { return giftManager; }
 
   /**
    * Called when Bukkit server enables the plguin
@@ -29,6 +33,8 @@ public class SecretSanta extends JavaPlugin {
 
     this.setupCommands();
     this.setupEventListeners();
+
+    giftManager = new GiftManager(this);
   }
 
   public void logDebug(String message) {
@@ -51,6 +57,7 @@ public class SecretSanta extends JavaPlugin {
    */
   public void onDisable () {
     this.getServer().getScheduler().cancelTasks(this);
+    giftManager.save();
   }
 
     private void setupCommands() {

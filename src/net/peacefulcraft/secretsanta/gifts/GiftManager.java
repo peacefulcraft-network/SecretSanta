@@ -1,6 +1,7 @@
 package net.peacefulcraft.secretsanta.gifts;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.ShulkerBox;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 
@@ -91,6 +93,40 @@ public class GiftManager {
                 }
             }
         }
+    }
+
+    /**
+     * Saves gift registry to .yml
+     */
+    public void save() {        
+        /*
+         * Iterate over registry to pull box values
+         * Creating new IOLoader for instance 
+         */
+        for(UUID id : giftRegistry.keySet()) {
+            GiftBox box = giftRegistry.get(id);
+
+            String sId = id.toString();
+            IOLoader<SecretSanta> config = new IOLoader<SecretSanta>(SecretSanta._this(), sId + ".yml");
+
+            FileConfiguration fCon = config.getCustomConfig();
+            fCon.createSection("SecretSanta");
+            fCon.set("SecretSanta", box.getConfig());
+
+            try{
+                fCon.save(config.getFile());
+            } catch(IOException ex) {
+                SecretSanta._this().logSevere("[GiftManager] Failed to save: " + sId + ".yml");
+                return;
+            }
+        }
+
+        SecretSanta._this().logDebug("[GiftManager] Saving complete.");
+    }
+
+    public void reload() {
+        save();
+        loadGifts();
     }
 
     /**

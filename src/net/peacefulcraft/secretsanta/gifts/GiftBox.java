@@ -1,5 +1,7 @@
 package net.peacefulcraft.secretsanta.gifts;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
 
@@ -101,6 +103,25 @@ public class GiftBox {
         }
 
         return box;
+    }
+
+    /**
+     * Creates a config map to be saved by manager
+     * @return Hashtable object of GiftBox payload
+     */
+    public Object getConfig() {
+        Hashtable<String, Object> boxTable = new Hashtable<String, Object>();
+        boxTable.put("Owner", this.owner.toString());
+        boxTable.put("Receiver", this.receiver.toString());
+        boxTable.put("IsGifted", this.isGifted);
+
+        List<String> lis = new ArrayList<>();
+        for(Gift g : this.gifts) {
+            lis.add(g.toString());
+        }
+        boxTable.put("Gifts", lis);
+        
+        return boxTable;
     }
 
     /**
