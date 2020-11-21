@@ -11,9 +11,21 @@ import org.bukkit.inventory.ItemStack;
 import net.peacefulcraft.secretsanta.SecretSanta;
 
 public class SecretSantaCommand implements CommandExecutor {
+
+    private final String HELP_MESSAGE = "______" + SecretSanta.messagingPrefix + "______\n" +
+                                    "1. Register: Registers you for Secret Santa! Opens December 1st!\n" +
+                                    "2. Submit: Submits your gift box in hand to Santa! Opens December 15th!\n" +
+                                    "4. Who: Tells you who you are Secret Santa for and gives you your gift box! Opens December 15th!\n" +
+                                    "3. GetGift: Tells Santa to give you your present! Opens Christmas Eve!";
+
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(label.equalsIgnoreCase("secretsanta")) {
             try {
+
+                if(args[0].equalsIgnoreCase("help")) {
+                    sender.sendMessage(HELP_MESSAGE);
+                    return true;
+                }
 
                 if(args[0].equalsIgnoreCase("register")) {
                     if(!(sender instanceof Player)) {
@@ -33,6 +45,23 @@ public class SecretSantaCommand implements CommandExecutor {
                     } else {
                         p.sendMessage(SecretSanta.messagingPrefix + " You are already registered for Secret Santa!");
                     }
+                    return true;
+                }
+
+                if(args[0].equalsIgnoreCase("who")) {
+                    if(!(sender instanceof Player)) {
+                        sender.sendMessage("Must be player to run this command.");
+                        return true;
+                    }
+
+                    if(!SecretSanta.getConfiguration().isRegistrationOpen()) {
+                        sender.sendMessage(SecretSanta.messagingPrefix + " Secret Santa who is not open! Check back on December 1st!");
+                        return true;
+                    }
+
+                    Player p = (Player) sender;
+                    String name = SecretSanta.getGiftManager().getPairedPlayer(p.getUniqueId());
+                    p.sendMessage(SecretSanta.messagingPrefix + " You have been assigned " + name + " ho ho ho!");
                     return true;
                 }
 
