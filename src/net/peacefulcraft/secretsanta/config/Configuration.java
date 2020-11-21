@@ -35,6 +35,36 @@ public class Configuration {
       }
     }
     public boolean isDebugEnabled() { return debugEnabled; }
+  
+  private boolean openRegistration;
+    public void setRegistration(boolean b) {
+      if(b != openRegistration) {
+        openRegistration = b;
+        c.set("openRegistration", b);
+        saveConfiguration();
+      }
+    }
+    public boolean isRegistrationOpen() { return openRegistration; }
+
+  private boolean openSubmit;
+    public void setOpenSubmit(boolean b) {
+      if(b != openSubmit) {
+        openSubmit = b;
+        c.set("openSubmit", b);
+        saveConfiguration();
+      }
+    }
+    public boolean isSubmitOpen() { return openSubmit; }
+
+  private boolean openGift;
+    public void setOpenGift(boolean b) {
+      if(b != openGift) {
+        openGift = b;
+        c.set("openGift", b);
+        saveConfiguration();
+      }
+    }
+    public boolean isGiftOpen() { return openGift; }
 
   public void saveConfiguration() { SecretSanta._this().saveConfig(); }
 }

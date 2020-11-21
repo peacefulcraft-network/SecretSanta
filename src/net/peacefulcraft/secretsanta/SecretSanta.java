@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.secretsanta.commands.ExampleCommand;
+import net.peacefulcraft.secretsanta.commands.SecretSantaCommand;
 import net.peacefulcraft.secretsanta.config.Configuration;
 import net.peacefulcraft.secretsanta.gifts.GiftManager;
 public class SecretSanta extends JavaPlugin {
@@ -61,7 +62,7 @@ public class SecretSanta extends JavaPlugin {
   }
 
     private void setupCommands() {
-      this.getCommand("example").setExecutor(new ExampleCommand());
+      this.getCommand("secretsanta").setExecutor(new SecretSantaCommand());
     }
 
     private void setupEventListeners() {

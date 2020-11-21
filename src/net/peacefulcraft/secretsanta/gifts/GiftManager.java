@@ -151,6 +151,18 @@ public class GiftManager {
     }
 
     /**
+     * Registers player for gifts
+     * @param id UUID of player
+     */
+    public boolean registerPlayer(UUID id) {
+        if(playerRegistry.containsKey(id)) { return false; }
+        String name = Bukkit.getPlayer(id).getDisplayName();
+        playerRegistry.put(id, name);
+
+        return true;
+    }
+
+    /**
      * Registers shulker box
      * @param id ID of player registering
      * @param item Shulkerbox

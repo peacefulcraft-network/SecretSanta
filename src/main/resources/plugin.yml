@@ -16,6 +16,10 @@ commands:
     description: This is an example command
     permission-message:  Permission templateus.example is required to use this command
     usage: /<command> to use the example command.
+  secretsanta:
+    aliases: [ 'ss' ]
+    description: Main command for Secret Santa
+    usage: /<command> [ help | register | submit | getgift ]
 
 permissions:
   templateus.*:
