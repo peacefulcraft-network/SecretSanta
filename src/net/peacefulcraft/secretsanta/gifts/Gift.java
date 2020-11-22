@@ -19,7 +19,7 @@ import net.peacefulcraft.secretsanta.SecretSanta;
 public class Gift {
 
     /** Raw string passed into constructor */
-    private String sRaw;
+    private String sRaw = "";
         /**Fetches raw string data for .yml */
         public String toString() { return this.sRaw; }
 
@@ -113,26 +113,33 @@ public class Gift {
 
         // Formatting raw string for .yml
         sRaw += "&material{" + this.mat.toString() + "}";
-        sRaw += "&display{" + this.displayName + "}";
         sRaw += "&amount{" + String.valueOf(this.amount) + "}";
 
-        String sLore = "&lore{";
-        for(String s : this.lore) {
-            sLore += s + "&split";
+        if(this.displayName != null && !this.displayName.isEmpty()) {
+            sRaw += "&display{" + this.displayName + "}";
         }
-        sLore += "}";
 
-        sRaw += sLore;
-
-        String sEnchant = "&enchants{";
-        for(Enchantment en : this.enchantments.keySet()) {
-            String sEn = en.getKey().getKey();
-            String sLevel = String.valueOf(this.enchantments.get(en));
-            sEnchant += sEn + "-" + sLevel + "&split";
+        if(this.lore != null) {
+            String sLore = "&lore{";
+            for(String s : this.lore) {
+                sLore += s + "&split";
+            }
+            sLore += "}";
+    
+            sRaw += sLore;
         }
-        sEnchant += "}";
 
-        sRaw += sEnchant;
+        if(this.enchantments != null && !this.enchantments.isEmpty()) {
+            String sEnchant = "&enchants{";
+            for(Enchantment en : this.enchantments.keySet()) {
+                String sEn = en.getKey().getKey();
+                String sLevel = String.valueOf(this.enchantments.get(en));
+                sEnchant += sEn + "-" + sLevel + "&split";
+            }
+            sEnchant += "}";
+    
+            sRaw += sEnchant;
+        }
     }
 
     /**

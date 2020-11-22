@@ -2,8 +2,8 @@
 # Reference
 # https://bukkit.gamepedia.com/Plugin_YAML
 #
-name: Templateus
-main: net.peacefulcraft.templateus.Templateus
+name: SecretSanta
+main: net.peacefulcraft.secretsanta.SecretSanta
 version: 0.0.1
 api-version: 1.16
 website: https://www.peacefulcraft.net/
@@ -11,11 +11,6 @@ depend: []
 softdepend: []
 
 commands:
-  example:
-    aliases: [ 'exmple' ]
-    description: This is an example command
-    permission-message:  Permission templateus.example is required to use this command
-    usage: /<command> to use the example command.
   secretsanta:
     aliases: [ 'ss' ]
     description: Main command for Secret Santa

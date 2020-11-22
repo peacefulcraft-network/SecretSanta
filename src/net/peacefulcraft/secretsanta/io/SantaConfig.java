@@ -166,4 +166,16 @@ public class SantaConfig implements GenericConfig {
     public boolean isList(String section) {
         return this.fc.isList(this.configName + "." + section);
     }
+
+    public Set<String> getBaseKeys(String section) {
+        return this.fc.getConfigurationSection(section).getKeys(false);
+    }
+
+    public String getBaseString(String field) {
+        return this.fc.getString(field);
+    }
+
+    public List<String> getBaseStringList(String field) {
+        return this.fc.getStringList(field);
+    }
 }

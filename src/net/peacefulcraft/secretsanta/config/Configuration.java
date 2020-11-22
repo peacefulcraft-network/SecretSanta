@@ -23,6 +23,12 @@ public class Configuration {
     YamlConfiguration defaultConfiguration = YamlConfiguration.loadConfiguration(defaultConfigurationFile);
     c.setDefaults(defaultConfiguration);
     saveConfiguration();
+
+    // Loading default variables
+    debugEnabled = c.getBoolean("debug", false);
+    openRegistration = c.getBoolean("openRegistration", false);
+    openSubmit = c.getBoolean("openSubmit", false);
+    openGift = c.getBoolean("openGift", false);
   }
 
   private boolean debugEnabled;

@@ -22,11 +22,52 @@ public class SecretSantaCommand implements CommandExecutor {
         if(label.equalsIgnoreCase("secretsanta")) {
             try {
 
+                /**
+                 * ADMIN COMMANDS
+                 * TODO: REMOVE
+                 */
+                if(args[0].equalsIgnoreCase("admin") || args[0].equalsIgnoreCase("ad")) {
+                    if(args[1].equalsIgnoreCase("reload")) {
+                        SecretSanta.getGiftManager().reload();
+                        return true;
+                    }
+                    if(args[1].equalsIgnoreCase("getplayers")) {
+                        sender.sendMessage(SecretSanta.getGiftManager().getPlayerRegistryString());
+                        return true;
+                    }
+                    if(args[1].equalsIgnoreCase("getgifts")) {
+                        sender.sendMessage(SecretSanta.getGiftManager().getGiftRegistryString());
+                        return true;
+                    }
+                    if(args[1].equalsIgnoreCase("getpairs")) {
+                        sender.sendMessage(SecretSanta.getGiftManager().getPairedRegistryString());
+                        return true;
+                    }
+                    if(args[1].equalsIgnoreCase("pair")) {
+                        SecretSanta.getGiftManager().pairPlayers();
+                        return true;
+                    }
+                    if(args[1].equalsIgnoreCase("clear")) {
+                        SecretSanta.getGiftManager().clearData();
+                        return true;
+                    }
+                    if(args[1].equalsIgnoreCase("load")) {
+                        SecretSanta.getGiftManager().loadGifts();
+                        return true;
+                    }
+                }
+
+                /**
+                 * Calls help string to player
+                 */
                 if(args[0].equalsIgnoreCase("help")) {
                     sender.sendMessage(HELP_MESSAGE);
                     return true;
                 }
 
+                /**
+                 * If unregsitered player we register
+                 */
                 if(args[0].equalsIgnoreCase("register")) {
                     if(!(sender instanceof Player)) {
                         sender.sendMessage("Must be player to run this command.");
@@ -48,6 +89,9 @@ public class SecretSantaCommand implements CommandExecutor {
                     return true;
                 }
 
+                /**
+                 * Fetches players gift target
+                 */
                 if(args[0].equalsIgnoreCase("who")) {
                     if(!(sender instanceof Player)) {
                         sender.sendMessage("Must be player to run this command.");
@@ -65,6 +109,9 @@ public class SecretSantaCommand implements CommandExecutor {
                     return true;
                 }
 
+                /**
+                 * Submits gift box
+                 */
                 if(args[0].equalsIgnoreCase("submit")) {
                     if(!(sender instanceof Player)) {
                         sender.sendMessage("Must be player to run this command.");
@@ -87,6 +134,9 @@ public class SecretSantaCommand implements CommandExecutor {
                     return true;
                 }
 
+                /**
+                 * Fetches players box
+                 */
                 if(args[0].equalsIgnoreCase("getgift")) {
                     if(!(sender instanceof Player)) {
                         sender.sendMessage("Must be player to run this command.");

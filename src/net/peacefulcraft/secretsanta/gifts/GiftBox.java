@@ -5,10 +5,12 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.secretsanta.SecretSanta;
@@ -20,10 +22,10 @@ public class GiftBox {
     private SantaConfig config;
 
     /**Loaded gifts from config */
-    private List<Gift> gifts;
+    private List<Gift> gifts = new ArrayList<>();
 
     /**Raw string data from config */
-    private List<String> sGifts;
+    private List<String> sGifts = new ArrayList<>();
 
     /**UUID of box owner */
     private UUID owner;
@@ -78,6 +80,7 @@ public class GiftBox {
         this.isGifted = false;
 
         for(ItemStack item : stack) {
+            if(item == null || item.getType() == null || item.getType().equals(Material.AIR)) { continue; }
             Gift g = new Gift(item);
             this.gifts.add(g);
         }
@@ -88,28 +91,54 @@ public class GiftBox {
      * @return Loaded shulkerbox, null if gifted already
      */
     public ItemStack getGiftBox() {
-        if(this.isGifted) { return null; }
+        if(this.isGifted) { 
+            SecretSanta._this().logDebug("[GiftBox] Gifted");
+            return null; 
+        }
 
         ItemStack box = new ItemStack(Material.GREEN_SHULKER_BOX, 1);
         if(box.getItemMeta() instanceof BlockStateMeta) {
-            BlockStateMeta bm = (BlockStateMeta)box.getItemMeta();
+            ItemMeta meta = box.getItemMeta();
+            BlockStateMeta bm = (BlockStateMeta)meta;
             if(bm.getBlockState() instanceof ShulkerBox) {
                 ShulkerBox s = (ShulkerBox) bm.getBlockState();
                 
                 for(Gift g : gifts) {
                     s.getInventory().addItem(g.getItemStack());
                 }
+                bm.setBlockState(s);
 
-                box.getItemMeta().setDisplayName(getBoxName());
+                bm.setDisplayName(getBoxName());
+                box.setItemMeta(bm);
+                this.isGifted = true;
+
+                SecretSanta._this().logDebug("[GiftBox] Box got");
+                return box;
             }
         }
+        SecretSanta._this().logDebug("[GiftBox] Straight null");
+        return null;
+    }
 
-        this.isGifted = true;
+    /**
+     * Creates empty shulker gift box
+     * @return Shulker box item
+     */
+    public static ItemStack getEmptyGiftBox(UUID owner) {
+        ItemStack box = new ItemStack(Material.GREEN_SHULKER_BOX, 1);
+        ItemMeta meta = box.getItemMeta();
+
+        // Setting owner name in box title
+        String name = Bukkit.getPlayer(owner).getName();
+        meta.setDisplayName(getBoxName());
+        box.setItemMeta(meta);
+
         return box;
     }
 
     /**
      * Creates a config map to be saved by manager
+     * 
      * @return Hashtable object of GiftBox payload
      */
     public Object getConfig() {
@@ -119,11 +148,11 @@ public class GiftBox {
         boxTable.put("IsGifted", this.isGifted);
 
         List<String> lis = new ArrayList<>();
-        for(Gift g : this.gifts) {
+        for (Gift g : this.gifts) {
             lis.add(g.toString());
         }
         boxTable.put("Gifts", lis);
-        
+
         return boxTable;
     }
 
@@ -136,8 +165,10 @@ public class GiftBox {
 
     /**
      * Helper function. Gets box custom name
+     * 
+     * @return Formattedb box name string
      */
-    private String getBoxName() {
+    private static String getBoxName() {
         String s = "Secret Santa Gift Box";
         String out = "";
 

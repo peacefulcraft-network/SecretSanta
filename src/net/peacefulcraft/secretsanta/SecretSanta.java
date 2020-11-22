@@ -36,6 +36,8 @@ public class SecretSanta extends JavaPlugin {
     this.setupEventListeners();
 
     giftManager = new GiftManager(this);
+
+    logDebug("Secret Santa has been enabled!");
   }
 
   public void logDebug(String message) {
