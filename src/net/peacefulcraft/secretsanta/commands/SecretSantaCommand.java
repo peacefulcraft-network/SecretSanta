@@ -129,7 +129,7 @@ public class SecretSantaCommand implements CommandExecutor {
                     if(res) {
                         p.sendMessage(SecretSanta.messagingPrefix + " Your Secret Santa box has been submitted!");
                     } else {
-                        p.sendMessage(SecretSanta.messagingPrefix + " You do not have a valid box in your hand!");
+                        p.sendMessage(SecretSanta.messagingPrefix + " You do not have a valid box in your hand!\n Check your box and remove any: Written Books!");
                     }
                     return true;
                 }

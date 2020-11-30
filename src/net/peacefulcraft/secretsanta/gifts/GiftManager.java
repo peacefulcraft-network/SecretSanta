@@ -3,6 +3,8 @@ package net.peacefulcraft.secretsanta.gifts;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -318,6 +320,8 @@ public class GiftManager {
                 UUID rec = pairedPlayers.get(id);
                 if(rec == null) { return false; }
 
+                if(s.getInventory().contains(Material.WRITTEN_BOOK)) { return false; }
+
                 // Create and register box
                 GiftBox box = new GiftBox(s.getInventory().getContents(), id, rec);
                 giftRegistry.put(id, box);
@@ -338,18 +342,19 @@ public class GiftManager {
      */
     public void pairPlayers() {
         List<UUID> lis = new ArrayList<UUID>(playerRegistry.keySet());
-        Random rand = new Random();
+        
+        Collections.shuffle(lis);
+        UUID first = lis.get(0);
 
-        if(lis.size() % 2 != 0) {
-            SecretSanta._this().logWarning("[GiftManager] Registered player size uneven. Register FixedKage.");
-            return;
-        }
+        for(int i = 0; i <= lis.size(); i++) {
+            UUID temp = lis.get(i);
+            if(i == lis.size()) {
+                pairedPlayers.put(temp, first);
+                break;
+            }
 
-        while(!lis.isEmpty()) {
-            UUID first = lis.remove(rand.nextInt(lis.size()));
-            UUID second = lis.remove(rand.nextInt(lis.size()));
-
-            pairedPlayers.put(first, second);
+            UUID tempNext = lis.get(i + 1);
+            pairedPlayers.put(temp, tempNext);
         }
 
         SecretSanta._this().logDebug("[GiftManager] Pairing complete: " + pairedPlayers.toString());
