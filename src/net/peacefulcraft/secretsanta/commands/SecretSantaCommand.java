@@ -26,7 +26,7 @@ public class SecretSantaCommand implements CommandExecutor {
                  * ADMIN COMMANDS
                  * TODO: REMOVE
                  */
-                if(args[0].equalsIgnoreCase("admin") || args[0].equalsIgnoreCase("ad")) {
+                if(sender.hasPermission("pcn.staff") && args[0].equalsIgnoreCase("admin") || args[0].equalsIgnoreCase("ad")) {
                     if(args[1].equalsIgnoreCase("reload")) {
                         SecretSanta.getGiftManager().reload();
                         return true;
