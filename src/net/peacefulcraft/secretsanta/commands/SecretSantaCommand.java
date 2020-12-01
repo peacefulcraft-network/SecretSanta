@@ -98,8 +98,8 @@ public class SecretSantaCommand implements CommandExecutor {
                         return true;
                     }
 
-                    if(!SecretSanta.getConfiguration().isRegistrationOpen()) {
-                        sender.sendMessage(SecretSanta.messagingPrefix + " Secret Santa who is not open! Check back on December 1st!");
+                    if(!SecretSanta.getConfiguration().isSubmitOpen()) {
+                        sender.sendMessage(SecretSanta.messagingPrefix + " Secret Santa who is not open! Check back on December 15th!");
                         return true;
                     }
 
